@@ -50,9 +50,9 @@ BarWidget {
         readonly property bool occupied: workspace !== null && workspace.toplevels.values.length > 0
         readonly property bool focused: Hyprland.focusedMonitor !== null && Hyprland.focusedMonitor.activeWorkspace !== null && Hyprland.focusedMonitor.activeWorkspace.id === modelData
 
-        // Base workspaces 1-5 are always shown; extras 6-10 only when they carry
-        // state, so empty non-persistent workspaces never linger in the bar (#8788).
-        visible: modelData <= 5 || occupied || focused
+        // Base workspaces 1-5 are always shown; extras 6-10 while Hyprland has them,
+        // including an empty one showing on another monitor.
+        visible: modelData <= 5 || workspace !== null
 
         bar: root.bar
         text: focused ? "\uDB85\uDCFB" : (modelData === 10 ? "0" : String(modelData))
